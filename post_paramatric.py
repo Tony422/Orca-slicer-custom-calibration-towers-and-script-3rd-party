@@ -7,9 +7,11 @@ import os
 # arg example: 
 # C:\\Users\\tony4\\AppData\\Local\\Programs\\Python\\Python313\\python.exe D:\\3d_print\\Qidi\\calibration\\post_paramatric.py -c "M106 P2 S0" -s "0" -i "50" -f ;
 # Put the above line into the post processing field of Orca. Make sure to change the file path of python and this script to what's on your computer
-# The arguments example is for setting up a 5 floors aux fan tower
+# The arguments example is for setting up a 6 floors aux fan tower
 # It means: find all "M106 P2 S0", replace them with "M106 P2 S(number)". The number will start at "0" and increment by 50 every 50 layers
 # Script will also add a "M106 P2 S(number)" at the start of every layer
+# If using the model in repo layer height need to be 0.2mm
+# Comand reference: https://marlinfw.org/meta/gcode/
 
 #argument interpreter
 argv_it = iter(sys.argv)
@@ -30,8 +32,8 @@ for a in argv_it:
             # increment. Script increment value every 50 layers
             increment = int(next(argv_it))
 
-print("This script modifies gcode to set up calibration tower. See code comments for how to use")
-print("Modifing " + destFile+"\n"+ "Target command: "command+" New value from:" + str(start)+" With increment of: "+str(increment))
+print("\n"+"This script modifies gcode to set up calibration tower. See code comments for how to use")
+print( "Modifing " + destFile+"\n"+ "Target command: "+command+"\n"+" New value from:" + str(start)+" With increment of: "+str(increment) +"\n" )
 sourceFile = destFile+".bak"
 #back up
 print("copy \""+destFile+"\" \""+sourceFile+"\"")
